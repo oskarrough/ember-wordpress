@@ -1,6 +1,6 @@
 {
   "name": "ember-wordpress",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A bridge between Ember and Wordpress",
   "directories": {
     "doc": "doc",
