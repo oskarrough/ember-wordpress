@@ -1,0 +1,7 @@
+{{#each model as |post|}}
+	{{link-to post.title 'posts.post' post}}<br>
+{{/each}}
+
+<p>{{link-to 'About page' 'page' 'about'}}</p>
+
+{{outlet}}

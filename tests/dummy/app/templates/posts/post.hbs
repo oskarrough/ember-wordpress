@@ -1,0 +1,17 @@
+<h1>{{{model.title}}}</h1>
+
+{{{model.content}}}
+
+<hr>
+
+<h3>Categories</h3>
+{{#each model.categories as |category|}}
+	{{category.name}}
+{{/each}}
+
+<h3>Tags</h3>
+{{#each model.tags as |tag|}}
+	{{tag.name}}
+{{/each}}
+
+{{outlet}}
