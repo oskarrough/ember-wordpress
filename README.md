@@ -28,6 +28,10 @@ You'll need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) 
 
 [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) and [ACF To REST API](https://wordpress.org/plugins/acf-to-rest-api/) work really well with this setup.
 
+## Models
+
+This addon provides models for post, page, category and tag. If you need to overwrite them, make sure they still extend the default ones provided by this addon. See [ember-wordpress/app/models](https://github.com/oskarrough/ember-wordpress/tree/master/app/models) as an example.
+
 ## Questions?
 
 While this ember addon is fairly untested, the setup isn't. Feel free to ask any questions here [https://github.com/oskarrough/ember-wordpress/issues](issues).
