@@ -34,4 +34,4 @@ This addon provides models for post, page, category and tag. If you need to over
 
 ## Questions?
 
-While this ember addon is fairly untested, the setup isn't. Feel free to ask any questions here [https://github.com/oskarrough/ember-wordpress/issues](issues).
+While this ember addon is fairly untested, the setup isn't. Feel free to ask any questions here https://github.com/oskarrough/ember-wordpress/issues.
