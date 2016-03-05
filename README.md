@@ -32,6 +32,12 @@ You'll need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) 
 
 This addon provides models for post, page, category and tag. If you need to overwrite them, make sure they still extend the default ones provided by this addon. See [ember-wordpress/app/models](https://github.com/oskarrough/ember-wordpress/tree/master/app/models) as an example.
 
+## Contributing
+
+It's the goal of ember-wordpress to become the bridge between ember/ember-data and the official WP REST API. Ideally, in adition to the provided serializer and models, the project's dummy app should serve as an example how to work with it.
+
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+
 ## Questions?
 
 While this ember addon is fairly untested, the setup isn't. Feel free to ask any questions here https://github.com/oskarrough/ember-wordpress/issues.
