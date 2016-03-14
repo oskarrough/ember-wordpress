@@ -28,6 +28,39 @@ You'll need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) 
 
 [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) and [ACF To REST API](https://wordpress.org/plugins/acf-to-rest-api/) work really well with this setup.
 
+### Wordpress custom post types
+
+To use a custom post type together with the WP API you have to be aware of two additional arguments:
+
+1. `show_in_rest` which must be set to true.
+2. `rest_base` which will be the endpoint of your post type (set it to the plural form of your model)
+
+Here's an example. You could save this file as `wp-content/plugins/my-custom-post-types.php`.
+
+```php
+<?php 
+/*
+Plugin Name: My custom post types
+Author URI: https://github.com/oskarrough/ember-wordpress/
+*/
+function artist_post_type() {
+	$labels = array(
+		'name' => 'Artists',
+		'singular_name' => 'Artist',
+		'menu_name' => 'Artists',
+	);
+	$args = array(
+		'labels' => $labels,
+		'show_in_rest'	=> true,
+		'rest_base' => 'artists',
+	);
+	register_post_type('artist', $args);
+}
+
+add_action('init', 'artist_post_type');
+?>
+```
+
 ## Models
 
 This addon provides models for post, page, category and tag. If you need to overwrite them, make sure they still extend the default ones provided by this addon. See [ember-wordpress/app/models](https://github.com/oskarrough/ember-wordpress/tree/master/app/models) as an example.
