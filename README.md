@@ -1,12 +1,14 @@
 # Ember Wordpress
 
-This will help you connect Ember Data with the official Wordpress API also known as the WP-API. Works fine with Ember Data 2.x and WP API v2. An extremely powerful and easy combination.
+This will help you connect Ember Data with the official Wordpress API also known as the WP-API. An extremely powerful and simple combination. You'll need to be using Ember Data > 2 and WP API v2.
+
+This addon works with ember-cli. Once installed, you'll have an application adapter, serializer as well as the default models (post, page, category, tag) that you need to get data out of the Wordpress API. As this is a work in progress, in this readme you'll find some helpful advice. Also see the `tests/dummy` folder in this repository where you'll find an example application.
+
+## Demonstration
 
 - [Demo](http://ember-wordpress.surge.sh/)
 - [Demo source code](https://github.com/oskarrough/ember-wordpress/tree/master/tests/dummy/app)
 - [Demo WP API](http://dev-ember-wordpress.pantheon.io/wp-json/wp/v2/)
-
-This addon works with ember-cli. Once installed, you'll have an application adapter, serializer as well as the default models (post, page, category, tag) that you need for Wordpress out of the box. For an example setup, see the `tests/dummy` folder in this repository.
 
 ## How to use
 
@@ -38,7 +40,7 @@ To use a custom post type together with the WP API you have to be aware of two a
 Here's an example. You could save this file as `wp-content/plugins/my-custom-post-types.php`.
 
 ```php
-<?php 
+<?php
 /*
 Plugin Name: My custom post types
 Author URI: https://github.com/oskarrough/ember-wordpress/
