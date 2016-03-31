@@ -1,1 +1,1 @@
-export { default } from 'ember-wordpress/adapters/wordpress';
+export {default} from 'ember-wordpress/adapters/wordpress';
