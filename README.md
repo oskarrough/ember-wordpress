@@ -76,7 +76,7 @@ Since Ember and WP-API supports loading of multiple resources of the same type i
 ```
 var ENV = {
   ...
-  coalesceFindRequests: true
+  wordpressEagerLoad: true
   ...
 ```
 
