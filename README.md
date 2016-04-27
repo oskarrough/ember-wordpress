@@ -67,6 +67,21 @@ add_action('init', 'artist_post_type');
 
 This addon provides models for post, page, category and tag. If you need to overwrite them, make sure they still extend the default ones provided by this addon. See [ember-wordpress/app/models](https://github.com/oskarrough/ember-wordpress/tree/master/app/models) as an example.
 
+### Eager loading
+
+By default, Ember loads every request to a record separately from the server. If you want to display a post and the names of all of it's tags for example, Ember will query the main post and every single tag. A post with five tags will result in six requests to the server. 
+
+Since Ember and WP-API supports loading of multiple resources of the same type in one request, you can opt-in for this feature:
+
+```
+var ENV = {
+  ...
+  coalesceFindRequests: true
+  ...
+```
+
+With this option enabled, loading a post with five tags will result in just two requests, because all tags of the post will be loaded together. This can improve the load time of your Ember app a lot!
+
 ## Contributing
 
 It's the goal of ember-wordpress to become the bridge between ember/ember-data and the official WP REST API. Ideally, in adition to the provided serializer and models, the project's dummy app should serve as an example how to work with it.
