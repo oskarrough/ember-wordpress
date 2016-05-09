@@ -13,14 +13,16 @@ This addon works with ember-cli. Once installed, you'll have an application adap
 ## How to use
 
 1. Install it: `ember install ember-wordpress`
-2. Define your `wordpressHost` in `config/environment.js`.
+2. Define your `host` in `config/environment.js`.
 
 Your host is where your Wordpress is running. Example:
 
 ```
 var ENV = {
   ...
-  wordpressHost: 'http://my-wordpress-install.com'
+  emberWordpress: {
+    host: 'http://my-wordpress-install.com'
+  }
   ...
 ```
 
@@ -76,7 +78,9 @@ Since Ember and WP-API supports loading of multiple resources of the same type i
 ```
 var ENV = {
   ...
-  wordpressEagerLoad: true
+  emberWordpress: {
+    coalesceFindRequests: true
+  }  
   ...
 ```
 
