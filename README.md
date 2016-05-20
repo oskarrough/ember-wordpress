@@ -81,6 +81,10 @@ The WP API supports many [arguments](http://v2.wp-api.org/reference/posts/) (fol
 
 By default the WP API returns a maximum of 10 items. For instance, `this.store.findAll('post')` would return 10 posts. To change that we need to find the right argument and endpoint. Looking at the documentation for WP API we find `per_page`. It could look like `wp-json/wp/v2/posts?per_page=99` which translates into the ember-data query `this.store.query('post', {per_page: 99})`.
 
+### How to query by slug
+
+To query a post by slug use the endpoint `wp-json/wp/v2/posts?filter[name=my-post]` and query `this.store.query('post', {filter: {name: 'my-post'}}).then(models => models.get('firstObject'));`. We take the first object because `query` always returns an array and here we are only after a single item.
+
 ### How to query by category
 
 To query posts by category slug use the endpoint `wp-json/wp/v2/posts?per_page=99&filter[category_name=my-category]` and query `this.store.query('post', {per_page: 99, filter: {category_name: 'my-category'}})`.
