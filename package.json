@@ -7,10 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build",
+    "build": "ember build -p",
     "start": "ember server",
     "test": "ember try:testall",
-    "deploy": "ember build -p; mv dist/index.html dist/200.html; surge dist ember-wordpress.surge.sh"
+    "deploy": "npm run build; mv dist/index.html dist/200.html; surge dist ember-wordpress.surge.sh"
   },
   "repository": "https://github.com/oskarrough/ember-wordpress/",
   "engines": {

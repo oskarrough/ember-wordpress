@@ -1,15 +1,18 @@
 html {
-	font-family: -apple-system, BlinkMacSystemFont, \.SFNSDisplay-Light, Roboto, sans-serif;
+	font-family: "-apple-system", "BlinkMacSystemFont", "\.SFNSDisplay-Light", Roboto, sans-serif;
 	text-rendering: optimizeLegibility;
 	font-feature-settings: "kern" 1;
 	font-kerning: normal;
 }
+
 body {
-	margin: 2rem 1rem;
+	margin: 2rem;
 }
+
 a {
 	color: blue;
 }
+
 a.active {
-	color: black;
+	color: red;
 }

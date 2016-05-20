@@ -1,5 +1,10 @@
 <h1>{{{article.title}}}</h1>
-<time>date: {{article.date}}</time>
+
+<p>
+	id: {{article.id}}<br>
+	<time>date: {{article.date}}</time>
+</p>
+
 {{{article.content}}}
 
 <h3>Categories</h3>
@@ -12,10 +17,10 @@
 <h3>Tags</h3>
 <ul>
 	{{#each article.tags as |tag|}}
-		<li>{{link-to tag.name 'tag' tag}}</li>
+		<li>{{tag.name}}</li>
 	{{/each}}
 </ul>
 
-<pre>id: {{article.id}}</pre>
+
 
 {{outlet}}
