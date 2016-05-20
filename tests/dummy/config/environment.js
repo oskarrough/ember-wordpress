@@ -17,7 +17,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-    wordpressHost: 'http://dev-ember-wordpress.pantheon.io'
+    wordpressHost: 'http://dev-ember-wordpress.pantheonsite.io'
   };
 
   if (environment === 'development') {
