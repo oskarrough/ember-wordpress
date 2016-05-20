@@ -1,43 +1,49 @@
 # Ember Wordpress
 
-This will help you connect Ember Data with the official Wordpress API also known as the WP-API. An extremely powerful and simple combination. You'll need to be using Ember Data > 2 and WP API v2.
+Helps you connect Ember Data with the official Wordpress API (WP-API). An extremely powerful combination.
 
-This addon works with ember-cli. Once installed, you'll have an application adapter, serializer as well as the default models (post, page, category, tag) that you need to get data out of the Wordpress API. As this is a work in progress, in this readme you'll find some helpful advice. Also see the `tests/dummy` folder in this repository where you'll find an example application.
+Ember Wordpress is an addon for ember-cli. Once installed, you'll have what you need to get data out of the Wordpress API. That is, an application adapter, serializer as well as the default models (post, page, category, tag).
 
 ## Demonstration
 
 - [Demo](http://ember-wordpress.surge.sh/)
-- [Demo source code](https://github.com/oskarrough/ember-wordpress/tree/master/tests/dummy/app)
-- [Demo WP API](http://dev-ember-wordpress.pantheon.io/wp-json/wp/v2/)
+- [Source code](https://github.com/oskarrough/ember-wordpress/tree/master/tests/dummy/app)
+- [API for the demo](http://dev-ember-wordpress.pantheonsite.io/wp-json/wp/v2/)
 
 ## How to use
 
-1. Install it: `ember install ember-wordpress`
-2. Define your `wordpressHost` in `config/environment.js`.
+Make sure you're using ember-cli and ember data 2.
 
-Your host is where your Wordpress is running. Example:
+1. `ember install ember-wordpress`
+2. Set your `wordpressHost` in `config/environment.js`
+3. Install Wordpress with the WP-API v2 plugin (see below)
+
+Example:
 
 ```
 var ENV = {
   ...
-  wordpressHost: 'http://my-wordpress-install.com'
+  wordpressHost: 'http://example.com'
   ...
+}
 ```
 
-## Wordpress requirements
+Next we'll configure Wordpress.
 
-You'll need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) plugin and possibly [WP-CORS](https://wordpress.org/plugins/wp-cors/). If you see your data at example/com/wp-json/wp/v2 it works.
+## Configuring Wordpress
 
-[Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) and [ACF To REST API](https://wordpress.org/plugins/acf-to-rest-api/) work really well with this setup.
+You'll need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) plugin. After installing, if you see your data at `example.com/wp-json/wp/v2` it works.
+
+[WP-CORS](https://wordpress.org/plugins/wp-cors/), [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) and [ACF To REST API](https://wordpress.org/plugins/acf-to-rest-api/) work really well with this setup.
 
 ### Wordpress custom post types
 
-To use a custom post type together with the WP API you have to be aware of two additional arguments:
+To use a custom post type together with the WP API you have to be aware of two additional arguments, when you define them.
 
-1. `show_in_rest` which must be set to true.
-2. `rest_base` which will be the endpoint of your post type (set it to the plural form of your model)
+1. `show_in_rest` must be set to true.
+2. `rest_base` will be the endpoint of your post type. Sset it to the plural form of your model, as this is what Ember expects. E.g. the endpoint for a `recipe` post type should be `recipies` and not `recipe`.
 
-Here's an example. You could save this file as `wp-content/plugins/my-custom-post-types.php`.
+Here's a full example. You could save this file as `wp-content/plugins/my-custom-post-types.php`.
 
 ```php
 <?php
@@ -67,12 +73,24 @@ add_action('init', 'artist_post_type');
 
 This addon provides models for post, page, category and tag. If you need to overwrite them, make sure they still extend the default ones provided by this addon. See [ember-wordpress/app/models](https://github.com/oskarrough/ember-wordpress/tree/master/app/models) as an example.
 
-## Contributing
+## Queries
 
-It's the goal of ember-wordpress to become the bridge between ember/ember-data and the official WP REST API. Ideally, in adition to the provided serializer and models, the project's dummy app should serve as an example how to work with it.
+The WP API supports many [arguments](http://v2.wp-api.org/reference/posts/) (follow the link and scroll down to "arguments") that you can use but it's not super friendly so here are some tips. As always, please see the source code for the demo for examples as well.
 
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+### How to query more than 10 items
+
+By default the WP API returns a maximum of 10 items. For instance, `this.store.findAll('post')` would return 10 posts. To change that we need to find the right argument and endpoint. Looking at the documentation for WP API we find `per_page`. It could look like `wp-json/wp/v2/posts?per_page=99` which translates into the ember-data query `this.store.query('post', {per_page: 99})`.
+
+### How to query by category
+
+To query posts by category slug use the endpoint `wp-json/wp/v2/posts?per_page=99&filter[category_name=my-category]` and query `this.store.query('post', {per_page: 99, filter: {category_name: 'my-category'}})`.
 
 ## Questions?
 
-While this ember addon is fairly untested, the setup isn't. Feel free to ask any questions here https://github.com/oskarrough/ember-wordpress/issues.
+While this ember addon is fairly untested, the setup isn't. It works :) Please ask any questions here https://github.com/oskarrough/ember-wordpress/issues.
+
+## Contributing
+
+It's the goal of ember-wordpress to be the bridge between ember/ember-data and the official WP REST API. Ideally, in addition to the provided adapter, serializer and models, the project's dummy app should serve as an example how to work with it.
+
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
