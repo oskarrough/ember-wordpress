@@ -71,7 +71,18 @@ add_action('init', 'artist_post_type');
 
 ## Models
 
-This addon provides models for post, page, category and tag. If you need to overwrite them, make sure they still extend the default ones provided by this addon. See [ember-wordpress/app/models](https://github.com/oskarrough/ember-wordpress/tree/master/app/models) as an example.
+You'll have four models ready out of the box:  `post`, `page`, `category` and `tag`.  If you want to extend a model and add an extra property, do it like this:
+
+```js
+// app/models/post.js
+import DS from 'ember-data';
+import PostModel from 'ember-wordpress/models/post';
+export default PostModel.extend({
+  myNewProperty: DS.attr()
+});
+```
+
+Note: `post` and `page` are identical, as are `category` and `tag`.
 
 ## Queries
 
