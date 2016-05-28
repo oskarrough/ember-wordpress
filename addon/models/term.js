@@ -1,8 +1,10 @@
+// This is the base class used for the 'Category' and 'Tag' models
+
 import DS from 'ember-data';
 
-const {attr} = DS;
+const {Model, attr} = DS;
 
-export default DS.Model.extend({
+export default Model.extend({
 	count: attr('number'),
 	description: attr('string'),
 	link: attr('string'),

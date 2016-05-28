@@ -1,14 +1,8 @@
-<p>This is a demonstation of <a href="https://github.com/oskarrough/ember-wordpress">ember-wordpress</a>. The source code is in the repository.</p>
-
-<p>Below are the latests <em>post</em> models from a test Wordpress installation.</p>
+<h2>Posts</h2>
 
 <ul>
 	{{#each model as |post|}}
-		<li>
-			{{#link-to 'posts.post' post}}
-				{{post.title}}
-			{{/link-to}}
-		</li>
+		<li>{{link-to post.title 'posts.post' post}}</li>
 	{{/each}}
 </ul>
 

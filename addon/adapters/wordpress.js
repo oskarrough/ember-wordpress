@@ -8,8 +8,8 @@ export default DS.RESTAdapter.extend({
 	namespace: 'wp-json/wp/v2',
 
 	handleResponse(status, headers, payload, requestData) {
-		// Wordpress sends the 'meta' data (useful for pagination) in the GET requests headers.
-		// Here we move it into a `meta` property like Ember expects.
+		// Wordpress sends meta data (useful for pagination) in GET requests headers.
+		// Here we move it to a `meta` property which Ember expects.
 		if (payload) {
 			const meta = {
 				total: headers['X-WP-Total'],

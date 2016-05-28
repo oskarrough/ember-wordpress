@@ -1,0 +1,13 @@
+<h2>Categories</h2>
+
+<ul>
+	{{#each model as |category|}}
+		<li>
+			{{#link-to 'categories.category' category}}
+				{{category.name}}
+			{{/link-to}}
+		</li>
+	{{/each}}
+</ul>
+
+{{outlet}}

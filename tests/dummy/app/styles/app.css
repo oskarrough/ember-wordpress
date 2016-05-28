@@ -3,16 +3,39 @@ html {
 	text-rendering: optimizeLegibility;
 	font-feature-settings: "kern" 1;
 	font-kerning: normal;
+	background-color: #E6E5DF;
+	line-height: 1.35;
 }
 
 body {
 	margin: 2rem;
+	max-width: 34rem;
 }
 
-a {
-	color: blue;
+nav {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+a,
+a:visited {
+	color: green;
 }
 
 a.active {
-	color: red;
+	color: black;
+}
+
+h1,h2,h3,h4,p,ul,ol, hr {
+	margin: 1rem 0;
+}
+
+hr {
+	height: 2px;
+	border: 0;
+	background-color: #111;
+}
+
+ul {
+
 }

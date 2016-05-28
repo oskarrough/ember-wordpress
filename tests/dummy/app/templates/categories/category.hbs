@@ -1,0 +1,17 @@
+<hr>
+
+<h1>{{category.name}}</h1>
+
+{{#if posts}}
+	<p>Posts categorized as <em>{{category.name}}</em>:</p>
+
+	<ul>
+		{{#each posts as |post|}}
+			<li>{{link-to post.title 'posts.post' post}}</li>
+		{{/each}}
+	</ul>
+{{else}}
+	<p>No posts here yet.</p>
+{{/if}}
+
+{{outlet}}
