@@ -2,16 +2,16 @@
 
 <h1>{{category.name}}</h1>
 
-{{#if posts.length}}
+{{#if posts.isFulfilled}}
 	<p>Posts categorized as <em>{{category.name}}</em>:</p>
-
 	<ul>
 		{{#each posts as |post|}}
 			<li>{{link-to post.title 'posts.post' post}}</li>
+		{{else}}
+			<li>There are no posts in this category. Yet.</li>
 		{{/each}}
 	</ul>
-{{else}}
-	<p>No posts here yet.</p>
 {{/if}}
 
 {{outlet}}
+
