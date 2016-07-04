@@ -6,12 +6,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function () {
-	this.route('page', {path: ':slug'});
-	this.route('posts', {path: '/'}, function () {
-		this.route('post', {path: ':slug'});
+	this.route('page', {path: 'page/:page_slug'});
+	this.route('posts', function () {
+		this.route('post', {path: ':post_slug'});
 	});
 	this.route('categories', function () {
-		this.route('category', {path: ':slug'});
+		this.route('category', {path: ':category_slug'});
 	});
 });
 
