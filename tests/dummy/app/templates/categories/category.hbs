@@ -6,7 +6,7 @@
 	<p>Posts categorized as <em>{{category.name}}</em>:</p>
 	<ul>
 		{{#each posts as |post|}}
-			<li>{{link-to post.title 'posts.post' post}}</li>
+			<li>{{link-to post.title 'posts.post' post.slug}}</li>
 		{{else}}
 			<li>There are no posts in this category. Yet.</li>
 		{{/each}}
