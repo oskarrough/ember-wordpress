@@ -100,6 +100,10 @@ To query a post by slug use the endpoint `wp-json/wp/v2/posts?filter[name=my-pos
 
 To query posts by category slug use the endpoint `wp-json/wp/v2/posts?per_page=99&filter[category_name=my-category]` and query `this.store.query('post', {per_page: 99, filter: {category_name: 'my-category'}})`.
 
+## Server-side rendering with FastBoot
+
+To get server-side rendering, install [Ember Fastboot](https://ember-fastboot.com/). Here's a [demo](https://ember-wordpress-nymqnnqwxp.now.sh/) of the Ember Wordpress dummy app served by fastboot. You'll see the actual HTML rendered if you view the source. Ember Wordpress doesn't require anything special to make this work. Here's a small [deployment tip](https://gist.github.com/oskarrough/42cef880cbfa874637e90c08102f18d0).
+
 ## Questions?
 
 While this ember addon is fairly untested, the setup isn't. It works :) Please ask any questions here https://github.com/oskarrough/ember-wordpress/issues.
