@@ -2,17 +2,17 @@
 
 Helps you connect Ember Data with the official Wordpress API (WP-API). An extremely powerful combination.
 
-Ember Wordpress is an addon for ember-cli. Once installed, you'll have what you need to get data out of the Wordpress API. That is, an application adapter, serializer as well as the default models (post, page, category, tag).
+Ember Wordpress is an addon for ember-cli. Once installed, you'll have what you need to get data out of the Wordpress API. That is, an application adapter, serializer as well as the default models: post, page, category and tag.
 
 ## Demonstration
 
-- [Demo](http://ember-wordpress.surge.sh/)
+- [Demo](https://ember-wordpress.surge.sh/)
 - [Source code](https://github.com/oskarrough/ember-wordpress/tree/master/tests/dummy/app)
-- [API for the demo](http://dev-ember-wordpress.pantheonsite.io/wp-json/wp/v2/)
+- [API for the demo](https://dev-ember-wordpress.pantheonsite.io/wp-json/wp/v2/)
 
 ## How to use
 
-Make sure you're using ember-cli and ember data 2.
+Make sure you're using ember-cli and ember data > 2.
 
 1. `ember install ember-wordpress`
 2. Set your `wordpressHost` in `config/environment.js`
