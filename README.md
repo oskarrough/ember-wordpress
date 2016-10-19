@@ -2,17 +2,17 @@
 
 Helps you connect Ember Data with the official Wordpress API (WP-API). An extremely powerful combination.
 
-Ember Wordpress is an addon for ember-cli. Once installed, you'll have what you need to get data out of the Wordpress API. That is, an application adapter, serializer as well as the default models (post, page, category, tag).
+Ember Wordpress is an addon for ember-cli. Once installed, you'll have what you need to get data out of the Wordpress API. That is, an application adapter, serializer as well as the default models: post, page, category and tag.
 
 ## Demonstration
 
-- [Demo](http://ember-wordpress.surge.sh/)
+- [Demo](https://ember-wordpress.surge.sh/)
 - [Source code](https://github.com/oskarrough/ember-wordpress/tree/master/tests/dummy/app)
-- [API for the demo](http://dev-ember-wordpress.pantheonsite.io/wp-json/wp/v2/)
+- [API for the demo](https://dev-ember-wordpress.pantheonsite.io/wp-json/wp/v2/)
 
 ## How to use
 
-Make sure you're using ember-cli and ember data 2.
+Make sure you're using ember-cli and ember data > 2.
 
 1. `ember install ember-wordpress`
 2. Set your `wordpressHost` in `config/environment.js`
@@ -99,6 +99,10 @@ To query a post by slug use the endpoint `wp-json/wp/v2/posts?filter[name=my-pos
 ### How to query by category
 
 To query posts by category slug use the endpoint `wp-json/wp/v2/posts?per_page=99&filter[category_name=my-category]` and query `this.store.query('post', {per_page: 99, filter: {category_name: 'my-category'}})`.
+
+## Server-side rendering with FastBoot
+
+To get server-side rendering, install [Ember Fastboot](https://ember-fastboot.com/). Here's a [demo](https://ember-wordpress-nymqnnqwxp.now.sh/) of the Ember Wordpress dummy app served by fastboot. You'll see the actual HTML rendered if you view the source. Ember Wordpress doesn't require anything special to make this work. Here's a small [deployment tip](https://gist.github.com/oskarrough/42cef880cbfa874637e90c08102f18d0).
 
 ## Questions?
 
