@@ -94,11 +94,15 @@ By default the WP API returns a maximum of 10 items. For instance, `this.store.f
 
 ### How to query by slug
 
-To query a post by slug use the endpoint `wp-json/wp/v2/posts?filter[name=my-post]` and query `this.store.query('post', {filter: {name: 'my-post'}}).then(models => models.get('firstObject'));`. We take the first object because `query` always returns an array and here we are only after a single item.
+To query a post by slug use the endpoint `wp-json/wp/v2/posts?slug=some-post-slug` and query `this.store.query('post', {slug: 'some-post-plug'}).then(models => models.get('firstObject'));`. We take the first object because `query` always returns an array and here we are only after a single item.
 
 ### How to query by category
 
-To query posts by category slug use the endpoint `wp-json/wp/v2/posts?per_page=99&filter[category_name=my-category]` and query `this.store.query('post', {per_page: 99, filter: {category_name: 'my-category'}})`.
+To query posts by category slug you will need two queries.
+
+First get the category id with the endpoint `wp-json/wp/v2/categories?slug=some-category-slug` and query `this.store.query('category', {slug: 'some-category-slug'}).then(models => models.get('firstObject'));`
+
+Then, get the posts with the endpoint `wp-json/wp/v2/posts?categories=category-id&per_page=99` and query `this.store.query('post', {per_page: 99, categories: category-id}).then(models => models.get('firstObject'));`
 
 ### How to enable caching for the WP API
 
