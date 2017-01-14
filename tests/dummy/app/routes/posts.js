@@ -1,11 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-	model() {
-		// return this.store.findAll('post');
+  model() {
+    // By default the WP-API returns a maximum of 10 items.
+    // return this.store.findAll('post');
 
-		// By default the WP-API returns a maximum of 10 items.
-		// To get more we can set the `per_page` query.
-		return this.store.query('post', {per_page: 99});
-	}
+    // To get more we can query with `per_page`.
+    return this.store.query('post', {per_page: 99});
+  }
 });
