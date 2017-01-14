@@ -11,7 +11,7 @@ export default Ember.Route.extend({
 	setupController(controller, category) {
 		// How to get all posts with by category slug
 		const posts = this.store.query('post', {
-			filter: {category_name: category.get('slug')}
+			categories: category.get('id')
 		});
 		controller.setProperties({
 			category,
