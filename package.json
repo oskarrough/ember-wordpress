@@ -1,6 +1,6 @@
 {
   "name": "ember-wordpress",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The bridge between Ember and Wordpress",
   "directories": {
     "doc": "doc",
@@ -42,8 +42,7 @@
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.1"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "keywords": [
     "ember-addon",
     "serializer",
