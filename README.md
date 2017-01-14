@@ -15,8 +15,7 @@ Ember Wordpress is an addon for ember-cli. Once installed, you'll have what you 
 Make sure you're using ember-cli and ember data > 2.
 
 1. `ember install ember-wordpress`
-2. Set your `wordpressHost` in `config/environment.js`
-3. Install Wordpress with the WP-API v2 plugin (see below)
+2. Define the address to your Wordpress install as `wordpressHost` in `config/environment.js`
 
 Example:
 
@@ -32,9 +31,10 @@ Next we'll configure Wordpress.
 
 ## Configuring Wordpress
 
-You'll need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) plugin. After installing, if you see your data at `example.com/wp-json/wp/v2` it works.
+Since Wordpress 4.7 the REST API is included for you. If you can't upgrade, you'll need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) plugin, which also works fine. After installing, create some posts or pages in Wordpress and see your data at `example.com/wp-json/wp/v2`.
 
-[WP-CORS](https://wordpress.org/plugins/wp-cors/), [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) and [ACF To REST API](https://wordpress.org/plugins/acf-to-rest-api/) work really well with this setup.
+If you're having CORS trouble: [WP-CORS](https://wordpress.org/plugins/wp-cors/)  
+If you want custom fields: [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) and [ACF To REST API](https://wordpress.org/plugins/acf-to-rest-api/)
 
 ### Wordpress custom post types
 
@@ -71,7 +71,7 @@ add_action('init', 'artist_post_type');
 
 ## Models
 
-You'll have four models ready out of the box:  `post`, `page`, `category` and `tag`.  If you want to extend a model and add an extra property, do it like this:
+You'll have four models ready out of the box:  `post`, `page`, `category` and `tag`.  If you want to extend a model with more features, extend the model like this:
 
 ```js
 // app/models/post.js
@@ -82,11 +82,14 @@ export default PostModel.extend({
 });
 ```
 
-Note: `post` and `page` are identical, as are `category` and `tag`.
+Note: the `post` and `page` models are identical and so are `category` and `tag`. For custom post types, it is recommended to extend the `post` model. If you're using the ACF plugin your custom fields will be at `model.get('acf.myCustomField')`.
 
 ## Queries
 
 The WP API supports many [arguments](http://v2.wp-api.org/reference/posts/) (follow the link and scroll down to "arguments") that you can use but it's not super friendly so here are some tips. As always, please see the source code for the demo for examples as well.
+
+The endpoint is where to find the data in the WP REST API. 
+The query is how that endpoint translates into the Ember data syntax.
 
 ### How to query more than 10 items
 
@@ -94,15 +97,24 @@ By default the WP API returns a maximum of 10 items. For instance, `this.store.f
 
 ### How to query by slug
 
-To query a post by slug use the endpoint `wp-json/wp/v2/posts?slug=some-post-slug` and query `this.store.query('post', {slug: 'some-post-plug'}).then(models => models.get('firstObject'));`. We take the first object because `query` always returns an array and here we are only after a single item.
+- Endpoint:  `wp-json/wp/v2/posts?slug=some-post-slug`
+- Query: `this.store.query('post', {slug: 'some-post-plug'}).then(models => models.get('firstObject'));`
+
+We take the first object because `query` always returns an array and we expect our query to only return a single object.
 
 ### How to query by category
 
 To query posts by category slug you will need two queries.
  
-First get the category id with the endpoint `wp-json/wp/v2/categories?slug=some-category-slug` and query `this.store.query('category', {slug: 'some-category-slug'}).then(models => models.get('firstObject'));`
+First get the category id with the
 
-Then, get the posts with the endpoint `wp-json/wp/v2/posts?categories=category-id&per_page=99` and query `this.store.query('post', {per_page: 99, categories: category-id}).then(models => models.get('firstObject'));`
+- Endpoint: `wp-json/wp/v2/categories?slug=some-category-slug`
+- Query: `this.store.query('category', {slug: 'some-category-slug'}).then(models => models.get('firstObject'));`
+
+Then, get the posts
+
+- Endpoint: `wp-json/wp/v2/posts?categories=category-id&per_page=99`
+- Query: `this.store.query('post', {per_page: 99, categories: category-id}).then(models => models.get('firstObject'));`
 
 ### How to enable caching for the WP API
 
