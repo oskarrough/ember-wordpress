@@ -1608,9 +1608,9 @@ ember-export-application-global@^1.0.5:
   dependencies:
     ember-cli-babel "^5.1.10"
 
-ember-get-config@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/ember-get-config/-/ember-get-config-0.2.0.tgz#01da4d86eec66c38876daa58de5e42ee406c3725"
+ember-get-config@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/ember-get-config/-/ember-get-config-0.2.1.tgz#a1325cceefcb4534c78fc6ccb2be87a3feda6817"
   dependencies:
     broccoli-file-creator "^1.1.1"
     ember-cli-babel "^5.1.6"
