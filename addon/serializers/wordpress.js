@@ -19,22 +19,21 @@ export default DS.RESTSerializer.extend({
 		const rootKey = Ember.String.pluralize(primaryModelClass.modelName);
 
 		payloadTemp[rootKey] = payload;
+		// meta cannot be part of payload but must be adjacent to it
+		payloadTemp.meta = payload.meta;
 
 		return this._super(store, primaryModelClass, payloadTemp, id, requestType);
 	},
 
 	normalize(modelClass, resourceHash, prop) {
 		// As you get bored typing `title.rendered`, here we move the `rendered` part up.
-		if (resourceHash.content && resourceHash.title.rendered) {
-			resourceHash.content = resourceHash.content.rendered;
-			resourceHash.title = resourceHash.title.rendered;
-		}
-		if (resourceHash.title && resourceHash.title.rendered) {
-			resourceHash.title = resourceHash.title.rendered;
-		}
-		if (resourceHash.excerpt && resourceHash.excerpt.rendered) {
-			resourceHash.excerpt = resourceHash.excerpt.rendered;
-		}
+
+		['content', 'title', 'excerpt'].forEach(property => {
+			if(resourceHash[property] && resourceHash[property].rendered){
+				resourceHash[property] = resourceHash[property].rendered;
+			}
+		});
+
 		return this._super(modelClass, resourceHash, prop);
 	}
 });
