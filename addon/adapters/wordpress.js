@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import config from 'ember-get-config';
+import getHeader from '../utils/get-header';
 
 // The WP API requires a rest adapter.
 export default DS.RESTAdapter.extend({
@@ -12,8 +13,8 @@ export default DS.RESTAdapter.extend({
 		// Here we move it to a `meta` property which Ember expects.
 		if (payload) {
 			const meta = {
-				total: headers['X-WP-Total'],
-				totalPages: headers['X-WP-TotalPages']
+				total: getHeader(headers, 'X-WP-Total'),
+				totalPages: getHeader(headers, 'X-WP-TotalPages')
 			};
 			payload.meta = meta;
 		}
