@@ -23,18 +23,25 @@ export default DS.RESTSerializer.extend({
 		return this._super(store, primaryModelClass, payloadTemp, id, requestType);
 	},
 
-	normalize(modelClass, resourceHash, prop) {
-		// As you get bored typing `title.rendered`, here we move the `rendered` part up.
-		if (resourceHash.content && resourceHash.title.rendered) {
-			resourceHash.content = resourceHash.content.rendered;
-			resourceHash.title = resourceHash.title.rendered;
+	normalize(modelClass, hash, prop) {
+    /* For fields like content, title and excerpt the Wordpress API returns a format like this:
+      title: {rendered: "my title"}
+      or for empty fields:
+      title: {rendered: ""}
+      ... this results in [object Object] in Ember templates.
+      Make sure to either return the `rendered` part or `null`.
+    */
+	  function getRendered (prop) {
+			if (prop && prop.rendered) {
+				return prop.rendered;
+			}
+			return null;
 		}
-		if (resourceHash.title && resourceHash.title.rendered) {
-			resourceHash.title = resourceHash.title.rendered;
-		}
-		if (resourceHash.excerpt && resourceHash.excerpt.rendered) {
-			resourceHash.excerpt = resourceHash.excerpt.rendered;
-		}
-		return this._super(modelClass, resourceHash, prop);
+
+		hash.content = getRendered(hash.content)
+		hash.title = getRendered(hash.title)
+		hash.excerpt = getRendered(hash.excerpt)
+
+		return this._super(modelClass, hash, prop);
 	}
 });
