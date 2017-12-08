@@ -6,12 +6,13 @@ node_js:
   - "6"
 
 sudo: false
-# dist: trusty
+dist: trusty
 
 addons:
   chrome: stable
 
-cache: yarn
+cache:
+  yarn: true
 
 env:
   global:
@@ -32,7 +33,7 @@ matrix:
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
-before_install:
+# before_install:
   # - npm config set spin false
   # - npm install -g npm@4
   # - npm --version
