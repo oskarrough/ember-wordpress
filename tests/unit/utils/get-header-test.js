@@ -1,5 +1,7 @@
-import { test } from 'ember-qunit';
-import getHeader from 'ember-ajax/utils/get-header';
+import { module, test } from 'ember-qunit';
+import getHeader from 'ember-wordpress/utils/get-header';
+
+module('Unit | Utility | get header');
 
 test('returns undefined when headers are undefined', function(assert) {
   const header = getHeader(undefined);
