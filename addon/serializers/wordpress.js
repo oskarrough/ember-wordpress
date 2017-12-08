@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import {pluralize} from 'ember-inflector';
 
 export default DS.RESTSerializer.extend({
 	isNewSerializerAPI: true,
@@ -16,7 +17,7 @@ export default DS.RESTSerializer.extend({
 	// Then, we can deal with our missing root element when extracting arrays from the JSON.
 	normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
 		const payloadTemp = {};
-		const rootKey = Ember.String.pluralize(primaryModelClass.modelName);
+		const rootKey = pluralize(primaryModelClass.modelName);
 
 		payloadTemp[rootKey] = payload;
 
