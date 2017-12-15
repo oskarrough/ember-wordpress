@@ -1,1 +1,4 @@
-export { default } from 'ember-wordpress/models/term';
+import Term from 'ember-wordpress/models/term';
+
+export default Term.extend({
+});
