@@ -1,1 +1,4 @@
-export { default } from 'ember-wordpress/models/post';
+import Post from 'ember-wordpress/models/post';
+
+export default Post.extend({
+});
