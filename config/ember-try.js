@@ -1,6 +1,7 @@
 /* eslint-env node */
 module.exports = {
   scenarios: [
+    useYarn: true,
     {
       name: 'ember-lts-2.12',
       npm: {
