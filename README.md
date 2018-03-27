@@ -8,7 +8,14 @@ Ember Wordpress is an addon for ember-cli that makes it easy to fetch data from 
 - [Source code for the demo](https://github.com/oskarrough/ember-wordpress/tree/master/tests/dummy/app)
 - [API for the demo](https://dev-ember-wordpress.pantheonsite.io/wp-json/wp/v2/)
 
-> Note, the demo API backend sometimes goes to sleep. Please open an issue if it is sleeping.
+> Note, the demo API sometimes goes to _sleep_. Please open an issue if so.
+
+Here's a couple of sites using Ember.js + Wordpress:
+
+- https://www.alivefestival.dk
+- http://pfadfinderei.com
+- http://magnus-winter.de
+- http://kunstjagd.com
 
 ## How to install
 
