@@ -1,39 +1,51 @@
 # Ember Wordpress
 
-Helps you connect Ember Data with the official Wordpress API (WP-API). An extremely powerful combination.
-
-Ember Wordpress is an addon for ember-cli. Once installed, you'll have what you need to get data out of the Wordpress API. That is, an application adapter, serializer as well as the default models: post, page, category and tag.
+Ember Wordpress is an addon for ember-cli that makes it easy to fetch data from the Wordpress API (WP-API) in your Ember sites. It includes an application adapter, serializer as well as some default models: post, page, category and tag.
 
 ## Demonstration
 
-- [Demo](https://ember-wordpress.surge.sh/)
-- [Source code](https://github.com/oskarrough/ember-wordpress/tree/master/tests/dummy/app)
+- [Demo website](https://ember-wordpress.surge.sh/)
+- [Source code for the demo](https://github.com/oskarrough/ember-wordpress/tree/master/tests/dummy/app)
 - [API for the demo](https://dev-ember-wordpress.pantheonsite.io/wp-json/wp/v2/)
 
-## How to use
+> Note, the demo API backend sometimes goes to sleep. Please open an issue if it is sleeping.
 
-Make sure you're using ember-cli and ember data > 2.
+## How to install
 
-1. `ember install ember-wordpress`
-2. Define the address to your Wordpress install as `wordpressHost` in `config/environment.js`
+1. Run `ember install ember-wordpress`
+2. In the `config/environment.js` file, define the address to your Wordpress install. Like this:
 
-Example:
-
-```
+```js
 var ENV = {
-  ...
-  wordpressHost: 'http://example.com'
+  wordpressHost: 'https://my-wordpress-site.com'
   ...
 }
 ```
 
-Next we'll configure Wordpress.
+## Models
+
+You'll have four models ready out of the box: `post`, `page`, `category` and `tag`.
+
+Note: the `post` and `page` models are identical and so are `category` and `tag`. For your own custom post types, it is recommended to extend the `post` model:
+
+```js
+// app/models/recipe.js
+import DS from 'ember-data';
+import PostModel from 'ember-wordpress/models/post';
+export default PostModel.extend({
+  ingredients: DS.attr()
+});
+```
+
+If you're using the ACF plugin your custom fields will be at `model.get('acf.myCustomField')`.
 
 ## Configuring Wordpress
 
-Since Wordpress 4.7 the REST API is included for you. If you can't upgrade, you'll need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) plugin, which also works fine. After installing, create some posts or pages in Wordpress and see your data at `example.com/wp-json/wp/v2`.
+Since Wordpress version 4.7 the REST API is included in core Wordpress. If you are on an earlier version you will need to install the [WP API v2](https://wordpress.org/plugins/rest-api/) plugin, which also works fine.
 
-If you're having CORS trouble: [WP-CORS](https://wordpress.org/plugins/wp-cors/)  
+After installing, create some posts or pages in Wordpress and see your data at `example.com/wp-json/wp/v2`.
+
+If you're having CORS trouble: [WP-CORS](https://wordpress.org/plugins/wp-cors/)
 If you want custom fields: [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) and [ACF To REST API](https://wordpress.org/plugins/acf-to-rest-api/)
 
 ### Wordpress custom post types
@@ -69,26 +81,11 @@ add_action('init', 'artist_post_type');
 ?>
 ```
 
-## Models
-
-You'll have four models ready out of the box:  `post`, `page`, `category` and `tag`.  If you want to extend a model with more features, extend the model like this:
-
-```js
-// app/models/post.js
-import DS from 'ember-data';
-import PostModel from 'ember-wordpress/models/post';
-export default PostModel.extend({
-  myNewProperty: DS.attr()
-});
-```
-
-Note: the `post` and `page` models are identical and so are `category` and `tag`. For custom post types, it is recommended to extend the `post` model. If you're using the ACF plugin your custom fields will be at `model.get('acf.myCustomField')`.
-
 ## Queries
 
-The WP API supports many [arguments](http://v2.wp-api.org/reference/posts/) (follow the link and scroll down to "arguments") that you can use but it's not super friendly so here are some tips. As always, please see the source code for the demo for examples as well.
+The WP API supports many [arguments](https://developer.wordpress.org/rest-api/reference/posts/#arguments) that you can use but it's not super friendly so here are some tips.
 
-The endpoint is where to find the data in the WP REST API. 
+The endpoint is where to find the data in the WP REST API.  
 The query is how that endpoint translates into the Ember data syntax.
 
 ### How to query more than 10 items
@@ -124,12 +121,6 @@ Enable caching by installing the [wp-rest-api-cache](https://github.com/airesvsg
 
 To get server-side rendering, install [Ember Fastboot](https://ember-fastboot.com/). Here's a [demo](https://ember-wordpress-nymqnnqwxp.now.sh/) of the Ember Wordpress dummy app served by fastboot. You'll see the actual HTML rendered if you view the source. Ember Wordpress doesn't require anything special to make this work. Here's a small [deployment tip](https://gist.github.com/oskarrough/42cef880cbfa874637e90c08102f18d0).
 
-## Questions?
-
-While this ember addon is fairly untested, the setup isn't. It works :) Please ask any questions here https://github.com/oskarrough/ember-wordpress/issues.
-
 ## Contributing
 
-It's the goal of ember-wordpress to be the bridge between ember/ember-data and the official WP REST API. Ideally, in addition to the provided adapter, serializer and models, the project's dummy app should serve as an example how to work with it.
-
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+It's the goal of ember-wordpress to be the bridge between ember/ember-data and the official WP REST API. Ideally, in addition to the provided adapter, serializer and models, this readme and the project's demo app should serve as good examples. Please ask any questions here https://github.com/oskarrough/ember-wordpress/issues.
