@@ -1,6 +1,6 @@
 {
   "name": "ember-wordpress",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "The bridge between Ember and Wordpress",
   "keywords": [
     "ember-addon",
