@@ -17,8 +17,12 @@ export default DS.RESTSerializer.extend({
   normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
     const payloadTemp = {};
     const rootKey = pluralize(primaryModelClass.modelName);
+    const meta = payload.meta;
+    
+    delete payload.meta;
 
     payloadTemp[rootKey] = payload;
+    payloadTemp.meta = meta;
 
     return this._super(store, primaryModelClass, payloadTemp, id, requestType);
   },
