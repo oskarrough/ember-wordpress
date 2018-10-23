@@ -31,9 +31,9 @@ var ENV = {
 
 ## Models
 
-You'll have four models ready out of the box: `post`, `page`, `category` and `tag`.
+You'll have seven models ready out of the box: `wordpress/post`, `wordpress/page`, `wordpress/category` `wordpress/tag`, `wordpress/attachment`,  `wordpress/comment`, `wordpress/user`.
 
-Note: the `post` and `page` models are identical and so are `category` and `tag`. For your own custom post types, it is recommended to extend the `post` model:
+Note: the `wordpress/post` and `wordpress/page` models are identical and so are `wordpress/category` and `wordpress/tag`. For your own custom post types, it is recommended to extend the `post` model:
 
 ```js
 // app/models/recipe.js
