@@ -19,5 +19,10 @@ export default DS.RESTAdapter.extend({
 			payload.meta = meta;
 		}
 		return this._super(status, headers, payload, requestData);
-	}
+	},
+
+  pathForType: function(modelName) {
+    modelName = modelName.replace('wordpress/', '');
+    return this._super(modelName);
+  }
 });
