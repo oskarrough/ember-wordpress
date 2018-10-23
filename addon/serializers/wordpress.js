@@ -24,7 +24,6 @@ export default DS.RESTSerializer.extend({
       hash.links[relationship] = hash['_links'][relationship][0].href;
     });
     delete hash['_links'];
-    console.log(this._super(modelClass, hash, prop));
     return this._super(modelClass, hash, prop);
   },
 
