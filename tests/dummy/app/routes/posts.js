@@ -6,6 +6,6 @@ export default Ember.Route.extend({
     // return this.store.findAll('post');
 
     // To get more we can query with `per_page`.
-    return this.get('store').query('post', {per_page: 99});
+    return this.get('store').query('wordpress/post', {per_page: 99});
   }
 });
