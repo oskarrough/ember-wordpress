@@ -5,4 +5,5 @@ export default function () {
   this.namespace = '/wp-json/wp/v2';
 
   this.get('/posts');
+  this.get('/media/:id', 'attachment');
 }
