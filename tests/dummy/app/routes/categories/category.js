@@ -10,7 +10,7 @@ export default Ember.Route.extend({
 
   setupController(controller, category) {
     // How to query all posts with a certain category.
-    const posts = this.store.query('post', {
+    const posts = this.store.query('wordpress/post', {
       categories: category.get('id')
     });
     controller.setProperties({
