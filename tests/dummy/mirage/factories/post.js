@@ -1,8 +1,6 @@
-import { Factory, faker, association } from 'ember-cli-mirage';
+import { Factory, faker, association, trait } from 'ember-cli-mirage';
 
 export default Factory.extend({
-
-  slug: faker.lorem.word,
 
   title() {
     return {
@@ -26,5 +24,27 @@ export default Factory.extend({
     return new Date(faker.date.past());
   },
 
-  'wp:featuredmedia': association()
+  'wp:featuredmedia': association(),
+
+  afterCreate(post) {
+    post.update({
+      slug: faker.helpers.slugify(post.title.rendered)
+    });
+  },
+
+  withTags: trait({
+    afterCreate(post, server) {
+      post.update({
+        tags: server.createList('tag', 4)
+      });
+    }
+  }),
+
+  withCategories: trait({
+    afterCreate(post, server) {
+      post.update({
+        categories: server.createList('category', 4)
+      });
+    }
+  })
 });

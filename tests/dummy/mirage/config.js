@@ -4,6 +4,9 @@ export default function () {
   this.urlPrefix = config.wordpressHost;
   this.namespace = '/wp-json/wp/v2';
 
-  this.get('/posts');
+  this.resource('category');
+  this.resource('page');
+  this.resource('post');
+  this.resource('tag');
   this.get('/media/:id', 'attachment');
 }
