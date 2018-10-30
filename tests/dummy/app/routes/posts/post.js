@@ -6,7 +6,7 @@ export default Ember.Route.extend({
     // return this.store.findRecord('post', params.id);
 
     // Support for slugs.
-    return this.store.query('post', {
+    return this.store.query('wordpress/post', {
       slug: params.post_slug
     }).then(models => models.get('firstObject'));
   }
