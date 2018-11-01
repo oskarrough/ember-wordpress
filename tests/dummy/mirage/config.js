@@ -27,6 +27,7 @@ export default function () {
   this.get('/tags/:id');
   this.get('/categories/:id');
   this.get('/attachments/:id');
+  this.get('/comments/:id');
 
   const filterRecordsByRequest = function (records, request) {
     const per_page = request.queryParams.per_page ? request.queryParams.per_page : 10;

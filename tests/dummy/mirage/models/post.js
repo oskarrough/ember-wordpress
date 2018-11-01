@@ -4,4 +4,5 @@ export default Model.extend({
   'wp:featuredmedia': belongsTo('attachment'),
   tags: hasMany('tag'),
   categories: hasMany('category'),
+  replies: hasMany('comment', { inverse: 'post' })
 });
