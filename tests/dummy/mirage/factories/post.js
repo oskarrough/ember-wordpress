@@ -46,5 +46,12 @@ export default Factory.extend({
         categories: server.createList('category', 4)
       });
     }
+  }),
+
+  withReplies: trait({
+    afterCreate(post, server) {
+      post.update({comment_status: 'open'});
+      server.createList('comment', 5, {post: post});
+    }
   })
 });

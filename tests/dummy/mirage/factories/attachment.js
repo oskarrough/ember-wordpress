@@ -1,0 +1,25 @@
+import { Factory, faker } from 'ember-cli-mirage';
+
+export default Factory.extend({
+  media_details() {
+    return {
+      sizes: {
+        thumbnail: {
+          source_url: faker.image.imageUrl()
+        },
+        medium: {
+          source_url: faker.image.imageUrl()
+        },
+        medium_large: {
+          source_url: faker.image.imageUrl()
+        },
+        large: {
+          source_url: faker.image.imageUrl()
+        },
+        full: {
+          source_url: faker.image.imageUrl()
+        }
+      }
+    }
+  }
+});

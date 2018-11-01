@@ -5,6 +5,8 @@
 	<time>date: {{article.date}}</time>
 </p>
 
+<img src="{{article.wp:featuredmedia.media_details.sizes.thumbnail.source_url}}">
+
 {{{article.content}}}
 
 <h3>Categories</h3>
@@ -21,6 +23,23 @@
 	{{/each}}
 </ul>
 
-
-
 {{outlet}}
+
+{{#if article.commentsAreOpen}}
+  <h3>Comments</h3>
+  {{#each article.replies as |comment|}}
+    <img src="{{comment.author_avatar_url_96}}">
+    <p>author name: {{comment.author_name}}</p>
+    <div>
+      <span>date: {{comment.date}}</span>
+    </div>
+    <p>
+      {{#if comment.isHolding}}
+        <em>Comment is holding.</em>
+      {{/if}}
+      {{#if comment.isApproved}}
+        {{{comment.content}}}
+      {{/if}}
+    </p>
+  {{/each}}
+{{/if}}
