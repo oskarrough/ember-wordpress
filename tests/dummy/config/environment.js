@@ -24,7 +24,7 @@ module.exports = function(environment) {
     },
 
     emberWordpress: {
-      host: 'http://dev-ember-wordpress.pantheon.io'
+      host: 'http://dev-ember-wordpress.pantheonsite.io'
     }
   };
 
