@@ -130,7 +130,7 @@ To get server-side rendering, install [Ember Fastboot](https://ember-fastboot.co
 
 By default, Ember loads every request to a record separately from the server. If you want to display a post and the names of all of it's tags for example, Ember will query the main post and every single tag. A post with five tags will result in six requests to the server. 
 
-Since Ember and WP-API supports loading of multiple resources of the same type in one request, you can opt-in for this feature:
+Since Ember and WP-API supports loading of multiple resources of the same type in one request, you can opt-in to this feature:
 
 ```
 var ENV = {
