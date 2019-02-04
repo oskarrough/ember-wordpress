@@ -1,8 +1,14 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('post', 'Unit | Model | post', {
+moduleForModel('wordpress/post', 'Unit | Model | wordpress/post', {
   // Specify the other units that are required for this test.
-  needs: ['model:category', 'model:tag']
+  needs: [
+    'model:wordpress/category',
+    'model:wordpress/tag',
+    'model:wordpress/user',
+    'model:wordpress/comment',
+    'model:wordpress/attachment'
+  ]
 });
 
 test('it exists', function(assert) {

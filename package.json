@@ -1,6 +1,6 @@
 {
   "name": "ember-wordpress",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "The bridge between Ember and Wordpress",
   "keywords": [
     "ember-addon",
@@ -8,7 +8,7 @@
     "wordpress"
   ],
   "license": "MIT",
-  "author": "Oskar Rough",
+  "author": "Oskar Rough, Oliver Görtz, Marc Diehlmann",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -33,6 +33,7 @@
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-mirage": "^0.4.9",
     "ember-cli-qunit": "^4.1.1",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
