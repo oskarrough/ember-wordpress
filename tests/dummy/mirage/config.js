@@ -1,7 +1,7 @@
 import config from 'ember-get-config';
 
 export default function () {
-  this.urlPrefix = config.wordpressHost;
+  this.urlPrefix = config.emberWordpress.host;
   this.namespace = '/wp-json/wp/v2';
 
   this.get('/posts', ({posts}, request) => {
