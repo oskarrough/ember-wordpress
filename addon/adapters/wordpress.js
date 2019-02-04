@@ -4,7 +4,8 @@ import getHeader from '../utils/get-header';
 
 // The WP API requires a rest adapter.
 export default DS.RESTAdapter.extend({
-	host: config.wordpressHost,
+	host: config.emberWordpress.host,
+	coalesceFindRequests: config.emberWordpress.coalesceFindRequests || false,
 	// This is the default namespace for WP API v2.
 	namespace: 'wp-json/wp/v2',
 

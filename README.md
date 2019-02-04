@@ -10,7 +10,7 @@ Ember Wordpress is an addon for ember-cli that makes it easy to fetch data from 
 
 > Note, the demo API sometimes goes to _sleep_. Please open an issue if so.
 
-Here's a couple of sites using Ember.js + Wordpress:
+Sites using ember-wordpress:
 
 - https://www.alivefestival.dk
 - http://pfadfinderei.com
@@ -20,12 +20,13 @@ Here's a couple of sites using Ember.js + Wordpress:
 ## How to install
 
 1. Run `ember install ember-wordpress`
-2. In the `config/environment.js` file, define the address to your Wordpress install. Like this:
+2. Define where your Wordpress installation is. Like this:
 
 ```js
-var ENV = {
-  wordpressHost: 'https://my-wordpress-site.com'
-  ...
+// config/environment.js
+...
+ENV.emberWordpress: {
+  host: 'https://my-wordpress-site.com'
 }
 ```
 
@@ -92,9 +93,6 @@ add_action('init', 'artist_post_type');
 
 The WP API supports many [arguments](https://developer.wordpress.org/rest-api/reference/posts/#arguments) that you can use but it's not super friendly so here are some tips.
 
-The endpoint is where to find the data in the WP REST API.  
-The query is how that endpoint translates into the Ember data syntax.
-
 ### How to query more than 10 items
 
 By default the WP API returns a maximum of 10 items. For instance, `this.store.findAll('post')` would return 10 posts. To change that we need to find the right argument and endpoint. Looking at the documentation for WP API we find `per_page`. It could look like `wp-json/wp/v2/posts?per_page=99` which translates into the ember-data query `this.store.query('post', {per_page: 99})`.
@@ -127,6 +125,23 @@ Enable caching by installing the [wp-rest-api-cache](https://github.com/airesvsg
 ## Server-side rendering with FastBoot
 
 To get server-side rendering, install [Ember Fastboot](https://ember-fastboot.com/). Here's a [demo](https://ember-wordpress-nymqnnqwxp.now.sh/) of the Ember Wordpress dummy app served by fastboot. You'll see the actual HTML rendered if you view the source. Ember Wordpress doesn't require anything special to make this work. Here's a small [deployment tip](https://gist.github.com/oskarrough/42cef880cbfa874637e90c08102f18d0).
+
+### Eager loading
+
+By default, Ember loads every request to a record separately from the server. If you want to display a post and the names of all of it's tags for example, Ember will query the main post and every single tag. A post with five tags will result in six requests to the server. 
+
+Since Ember and WP-API supports loading of multiple resources of the same type in one request, you can opt-in for this feature:
+
+```
+var ENV = {
+  ...
+  emberWordpress: {
+    coalesceFindRequests: true
+  }  
+  ...
+```
+
+With this option enabled, loading a post with five tags will result in just two requests, because all tags of the post will be loaded together. This can improve the load time of your Ember app a lot!
 
 ## Contributing
 
