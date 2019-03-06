@@ -20,7 +20,7 @@ Sites using ember-wordpress:
 ## How to install
 
 1. Run `ember install ember-wordpress`
-2. Define where your Wordpress installation is. Like this:
+2. Define where your Wordpress installation is:
 
 ```js
 // config/environment.js
@@ -29,6 +29,8 @@ ENV.emberWordpress: {
   host: 'https://my-wordpress-site.com'
 }
 ```
+
+On a version before 2.0.1? Use `ENV.wordpressHost` instead.
 
 ## Models
 
