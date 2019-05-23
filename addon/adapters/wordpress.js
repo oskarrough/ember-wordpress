@@ -21,37 +21,67 @@ export default DS.RESTAdapter.extend({
 	 * use ember-cli-fastboot-dotenv for fetching the wordpress host from the
 	 * .env file (or any set environment variable)
 	 */
-	host: computed(function() {
+	_host_fb: computed('_host', function() {
+		if (this.get('WORDPRESS_HOST_FASTBOOT')) {
+			return this.get('WORDPRESS_HOST_FASTBOOT');
+		}
+
+		const HOST = this.getFromDotEnv('WORDPRESS_HOST_FASTBOOT');
+		if (HOST) {
+			this.set('WORDPRESS_HOST_FASTBOOT', HOST);
+		} else if (this.get('_host')) {
+			this.set('WORDPRESS_HOST_FASTBOOT', this.get('_host'));
+		} else {
+			this.set('WORDPRESS_HOST_FASTBOOT', config.emberWordpress.host);
+		}
+
+		return this.get('WORDPRESS_HOST_FASTBOOT');
+	}),
+	_host: computed(function() {
 		if (this.get('WORDPRESS_HOST')) {
-			// Wordpress Hostb is already fetched, just return it!
 			return this.get('WORDPRESS_HOST');
 		}
 
-		// host was not fetched yet, let’s ask dotenv service for the variable...
-		let dotenv = getOwner(this).lookup('service:dotenv');
-
-		if (dotenv) {
-			// dotenv was found and loaded, let’s fetch the variable
-			let {
-				WORDPRESS_HOST
-			} = dotenv.getProperties('WORDPRESS_HOST');
-
-			if (WORDPRESS_HOST) {
-				// we could find a WORDPRESS_HOST variable, let’s store it.
-				this.set('WORDPRESS_HOST', WORDPRESS_HOST);
-
-				// ...and return it.
-				return this.get('WORDPRESS_HOST');
-			}
+		const HOST = this.getFromDotEnv('WORDPRESS_HOST');
+		if (HOST) {
+			this.set('WORDPRESS_HOST', HOST);
+		} else {
+			this.set('WORDPRESS_HOST', config.emberWordpress.host);
 		}
 
-		// either dotenv was not found or it did not contain any WORDPRESS_HOST variable,
-		// let’s get the host from the config...
-		this.set('WORDPRESS_HOST', config.emberWordpress.host);
-
-		// ...and return it.
 		return this.get('WORDPRESS_HOST');
 	}),
+	host: computed(function() {
+		let fastboot = getOwner(this).lookup('service:fastboot');
+
+		if (fastboot) {
+			if (fastboot.get('isFastBoot')) {
+				return this.get('_host_fb');
+			}
+		}
+		return this.get('_host');
+	}),
+
+	getFromDotEnv(key) {
+		let dotenv = getOwner(this).lookup('service:dotenv');
+
+		if (!dotenv) {
+			return null;
+		}
+
+		// dotenv was found and loaded, let’s fetch the variable
+		const properties = dotenv.getProperties(key);
+
+		if (typeof properties !== 'object') {
+			return null;
+		}
+
+		if (typeof properties[key] === 'undefined') {
+			return null;
+		}
+
+		return properties[key];
+	},
 
 	// Whether to send many requests or to one-big request.
 	coalesceFindRequests: config.emberWordpress.coalesceFindRequests || false,
