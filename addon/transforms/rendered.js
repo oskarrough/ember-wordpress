@@ -2,7 +2,11 @@ import DS from 'ember-data';
 
 export default DS.Transform.extend({
   deserialize(serialized) {
-    return serialized.rendered;
+    // Depending on Wordpress version, this will exist. Or not.
+    if (serialized.rendered) {
+      return serialized.rendered;
+    }
+    return serialized;
   },
 
   serialize(deserialized) {
