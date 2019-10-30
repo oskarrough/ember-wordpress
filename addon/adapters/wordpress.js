@@ -87,7 +87,7 @@ export default DS.RESTAdapter.extend({
 	coalesceFindRequests: config.emberWordpress.coalesceFindRequests || false,
 
 	// This is the default namespace for WP API v2.
-	namespace: 'wp-json/wp/v2',
+	namespace: 'index.php/wp-json/wp/v2',
 
 	handleResponse(status, headers, payload, requestData) {
 		// Wordpress sends meta data (useful for pagination) in GET requests headers.
