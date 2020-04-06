@@ -29,5 +29,10 @@ export default DS.RESTAdapter.extend({
   pathForType: function(modelName) {
     modelName = modelName.replace('wordpress/', '');
     return this._super(modelName);
+  },
+
+  findMany(store, type, ids, snapshots) {
+    let url = this.buildURL(type.modelName, ids, snapshots, 'findMany');
+    return this.ajax(url, 'GET', { data: { include: ids } });
   }
 });
