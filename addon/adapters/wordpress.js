@@ -52,7 +52,6 @@ export default DS.RESTAdapter.extend({
 		return this.get('WORDPRESS_HOST');
 	}),
 	host: computed(function() {
-		console.log('TEST PUSH')
 		let fastboot = getOwner(this).lookup('service:fastboot');
 
 		if (fastboot) {
@@ -106,5 +105,11 @@ export default DS.RESTAdapter.extend({
 	pathForType: function(modelName) {
 		modelName = modelName.replace('wordpress/', '');
 		return this._super(modelName);
+	},
+
+	ajaxOptions: function( url, type, options ) {
+		let hash = this._super(url, type, options);
+		hash.timeout = 8000;
+		return hash;
 	}
 });
