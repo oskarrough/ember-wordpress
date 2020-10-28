@@ -107,9 +107,30 @@ export default DS.RESTAdapter.extend({
 		return this._super(modelName);
 	},
 
+	_ajaxTimeout: computed(function() {
+		if (this.get('WORDPRESS_API_TIMEOUT')) {
+			return this.get('WORDPRESS_API_TIMEOUT');
+		}
+
+		let API_TIMEOUT = parseInt( this.getFromDotEnv('WORDPRESS_API_TIMEOUT') );
+		if ( !API_TIMEOUT) {
+			if( typeof config === 'object' && typeof config.emberWordpress === 'object' ) {
+				API_TIMEOUT = parseInt( config.emberWordpress.api_timeout ) || 0;
+			}
+		}
+
+		if( !API_TIMEOUT || API_TIMEOUT <= 0) {
+			API_TIMEOUT = 8000;
+		}
+
+		this.set('WORDPRESS_API_TIMEOUT', API_TIMEOUT);
+
+		return this.get('WORDPRESS_API_TIMEOUT');
+	}),
+
 	ajaxOptions: function( url, type, options ) {
 		let hash = this._super(url, type, options);
-		hash.timeout = 8000;
+		hash.timeout = this.get('_ajaxTimeout');
 		return hash;
 	},
 
