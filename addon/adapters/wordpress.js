@@ -52,7 +52,6 @@ export default DS.RESTAdapter.extend({
 		return this.get('WORDPRESS_HOST');
 	}),
 	host: computed(function() {
-		console.log("A line of code");
 		let fastboot = getOwner(this).lookup('service:fastboot');
 
 		if (fastboot) {
