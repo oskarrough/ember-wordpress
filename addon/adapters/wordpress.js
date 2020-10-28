@@ -1,17 +1,93 @@
 import DS from 'ember-data';
 import config from 'ember-get-config';
 import getHeader from '../utils/get-header';
+import {
+	computed
+} from '@ember/object';
+import {
+	getOwner
+} from '@ember/application';
 
 // The WP API requires a rest adapter.
 export default DS.RESTAdapter.extend({
-  // Where your Wordpress installation is.
-	host: config.emberWordpress.host,
 
-  // Whether to send many requests or to one-big request.
+	/**
+	 * Load this adapter after  'ember-cli-fastboot-dotenv' has loaded.
+	 */
+	after: 'ember-cli-fastboot-dotenv',
+
+	/**
+	 * --- was "host: config.emberWordpress.host " but has been modified to
+	 * use ember-cli-fastboot-dotenv for fetching the wordpress host from the
+	 * .env file (or any set environment variable)
+	 */
+	_host_fb: computed('_host', function() {
+		if (this.get('WORDPRESS_HOST_FASTBOOT')) {
+			return this.get('WORDPRESS_HOST_FASTBOOT');
+		}
+
+		const HOST = this.getFromDotEnv('WORDPRESS_HOST_FASTBOOT');
+		if (HOST) {
+			this.set('WORDPRESS_HOST_FASTBOOT', HOST);
+		} else if (this.get('_host')) {
+			this.set('WORDPRESS_HOST_FASTBOOT', this.get('_host'));
+		} else {
+			this.set('WORDPRESS_HOST_FASTBOOT', config.emberWordpress.host);
+		}
+
+		return this.get('WORDPRESS_HOST_FASTBOOT');
+	}),
+	_host: computed(function() {
+		if (this.get('WORDPRESS_HOST')) {
+			return this.get('WORDPRESS_HOST');
+		}
+
+		const HOST = this.getFromDotEnv('WORDPRESS_HOST');
+		if (HOST) {
+			this.set('WORDPRESS_HOST', HOST);
+		} else {
+			this.set('WORDPRESS_HOST', config.emberWordpress.host);
+		}
+
+		return this.get('WORDPRESS_HOST');
+	}),
+	host: computed(function() {
+		let fastboot = getOwner(this).lookup('service:fastboot');
+
+		if (fastboot) {
+			if (fastboot.get('isFastBoot')) {
+				return this.get('_host_fb');
+			}
+		}
+		return this.get('_host');
+	}),
+
+	getFromDotEnv(key) {
+		let dotenv = getOwner(this).lookup('service:dotenv');
+
+		if (!dotenv) {
+			return null;
+		}
+
+		// dotenv was found and loaded, let’s fetch the variable
+		const properties = dotenv.getProperties(key);
+
+		if (typeof properties !== 'object') {
+			return null;
+		}
+
+		if (typeof properties[key] === 'undefined') {
+			return null;
+		}
+
+		return properties[key];
+	},
+
+	// Whether to send many requests or to one-big request.
 	coalesceFindRequests: config.emberWordpress.coalesceFindRequests || false,
 
 	// This is the default namespace for WP API v2.
-	namespace: 'wp-json/wp/v2',
+	namespace: 'index.php/wp-json/wp/v2',
 
 	handleResponse(status, headers, payload, requestData) {
 		// Wordpress sends meta data (useful for pagination) in GET requests headers.
@@ -26,13 +102,40 @@ export default DS.RESTAdapter.extend({
 		return this._super(status, headers, payload, requestData);
 	},
 
-  pathForType: function(modelName) {
-    modelName = modelName.replace('wordpress/', '');
-    return this._super(modelName);
-  },
+	pathForType: function(modelName) {
+		modelName = modelName.replace('wordpress/', '');
+		return this._super(modelName);
+	},
 
-  findMany(store, type, ids, snapshots) {
-    let url = this.buildURL(type.modelName, ids, snapshots, 'findMany');
-    return this.ajax(url, 'GET', { data: { include: ids } });
-  }
+	_ajaxTimeout: computed(function() {
+		if (this.get('WORDPRESS_API_TIMEOUT')) {
+			return this.get('WORDPRESS_API_TIMEOUT');
+		}
+
+		let API_TIMEOUT = parseInt( this.getFromDotEnv('WORDPRESS_API_TIMEOUT') );
+		if ( !API_TIMEOUT) {
+			if( typeof config === 'object' && typeof config.emberWordpress === 'object' ) {
+				API_TIMEOUT = parseInt( config.emberWordpress.api_timeout ) || 0;
+			}
+		}
+
+		if( !API_TIMEOUT || API_TIMEOUT <= 0) {
+			API_TIMEOUT = 8000;
+		}
+
+		this.set('WORDPRESS_API_TIMEOUT', API_TIMEOUT);
+
+		return this.get('WORDPRESS_API_TIMEOUT');
+	}),
+
+	ajaxOptions: function( url, type, options ) {
+		let hash = this._super(url, type, options);
+		hash.timeout = this.get('_ajaxTimeout');
+		return hash;
+	},
+
+	findMany(store, type, ids, snapshots) {
+		let url = this.buildURL(type.modelName, ids, snapshots, 'findMany');
+		return this.ajax(url, 'GET', { data: { include: ids } });
+	}
 });
