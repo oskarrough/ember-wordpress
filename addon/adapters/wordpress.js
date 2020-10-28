@@ -111,5 +111,10 @@ export default DS.RESTAdapter.extend({
 		let hash = this._super(url, type, options);
 		hash.timeout = 8000;
 		return hash;
+	},
+
+	findMany(store, type, ids, snapshots) {
+		let url = this.buildURL(type.modelName, ids, snapshots, 'findMany');
+		return this.ajax(url, 'GET', { data: { include: ids } });
 	}
 });
