@@ -23,8 +23,8 @@ module.exports = function (environment) {
     },
 
     emberWordpress: {
-      host: 'http://dev-ember-wordpress.pantheonsite.io'
-    }
+      host: 'http://dev-ember-wordpress.pantheonsite.io',
+    },
   };
 
   if (environment === 'development') {
@@ -33,6 +33,12 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV['ember-cli-mirage'] = {
+      enabled: true,
+      directory: 'tests/dummy/mirage',
+      autostart: true
+    };
   }
 
   if (environment === 'test') {
