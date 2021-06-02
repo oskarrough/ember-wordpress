@@ -1,7 +1,6 @@
-import DS from 'ember-data';
+import { hasMany, attr, belongsTo } from '@ember-data/model';
 import BaseModel from './base';
 import { computed } from '@ember/object';
-const { belongsTo, attr, hasMany } = DS;
 
 export default BaseModel.extend({
   comment_status: attr('string'),

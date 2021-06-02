@@ -1,6 +1,5 @@
+import { attr } from '@ember-data/model';
 import BaseModel from './base';
-import DS from "ember-data";
-const { attr } = DS;
 import { alias } from '@ember/object/computed';
 
 export default BaseModel.extend({

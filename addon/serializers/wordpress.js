@@ -1,7 +1,7 @@
-import DS from 'ember-data';
+import RESTSerializer from '@ember-data/serializer/rest';
 import {pluralize} from 'ember-inflector';
 
-export default DS.RESTSerializer.extend({
+export default RESTSerializer.extend({
 
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
     let normalizedPayload = {};

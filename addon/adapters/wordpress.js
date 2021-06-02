@@ -1,9 +1,9 @@
-import DS from 'ember-data';
+import RESTAdapter from '@ember-data/adapter/rest';
 import config from 'ember-get-config';
 import getHeader from '../utils/get-header';
 
 // The WP API requires a rest adapter.
-export default DS.RESTAdapter.extend({
+export default RESTAdapter.extend({
   // Where your Wordpress installation is.
 	host: config.emberWordpress.host,
 
