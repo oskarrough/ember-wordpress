@@ -12,7 +12,7 @@ export default class CommentModel extends BaseModel {
   @belongsTo('wordpress/post') post;
 
   get author_avatar_url_96() {
-    return this.author_avatar_urls['96'];
+    return this.author_avatar_urls?.['96'];
   }
 
   get isHolding() {

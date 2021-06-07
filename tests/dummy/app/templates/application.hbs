@@ -1,9 +1,29 @@
-<h1>{{link-to 'Ember Wordpress' 'application'}}</h1>
+<h1>
+  <LinkTo @route='application'>
+    Ember Wordpress
+  </LinkTo>
+</h1>
 
-<p>This is a demo application of bridging an Ember.js front-end with a Wordpress WP-API backend using <a href="https://github.com/oskarrough/ember-wordpress">ember-wordpress</a>. The source code is in the repository's `tests/dummy` folder.</p>
+<p>
+  This is a demo application of bridging an Ember.js front-end with a Wordpress WP-API backend using
+  <a href='https://github.com/oskarrough/ember-wordpress'>
+    ember-wordpress
+  </a>
+  . The source code is in the repository's `tests/dummy` folder.
+</p>
 
 <nav>
-	{{link-to 'Posts' 'posts'}} &#9679; {{link-to 'Categories' 'categories'}} &#9679; {{link-to 'About page' 'page' 'about'}}
+  <LinkTo @route='posts' data-test-nav-posts>
+    Posts
+  </LinkTo>
+  ●
+  <LinkTo @route='categories' data-test-nav-categories>
+    Categories
+  </LinkTo>
+  ●
+  <LinkTo @route='page' @model='about' data-test-nav-about>
+    About page
+  </LinkTo>
 </nav>
 
 {{outlet}}

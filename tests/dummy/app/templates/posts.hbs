@@ -1,9 +1,15 @@
-<h2>Posts</h2>
+<h2>
+  Posts
+</h2>
 
 <ul>
-	{{#each model as |post|}}
-		<li>{{link-to post.title 'posts.post' post.slug}}</li>
-	{{/each}}
+  {{#each @model as |post|}}
+    <li>
+      <LinkTo @route='posts.post' @model={{post.slug}} data-test-posts-link>
+        {{post.title}}
+      </LinkTo>
+    </li>
+  {{/each}}
 </ul>
 
 {{outlet}}

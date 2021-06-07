@@ -1,3 +1,3 @@
 import PostModel from './post';
 
-export default PostModel
+export default PostModel;

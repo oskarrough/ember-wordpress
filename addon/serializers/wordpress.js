@@ -5,6 +5,7 @@ export default class WordpressSerializer extends RESTSerializer {
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
     let normalizedPayload = {};
     normalizedPayload[primaryModelClass.modelName] = [payload];
+
     return super.normalizeSingleResponse(
       store,
       primaryModelClass,

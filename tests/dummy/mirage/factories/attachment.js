@@ -6,21 +6,21 @@ export default Factory.extend({
     return {
       sizes: {
         thumbnail: {
-          source_url: faker.image.imageUrl()
+          source_url: faker.image.imageUrl(),
         },
         medium: {
-          source_url: faker.image.imageUrl()
+          source_url: faker.image.imageUrl(),
         },
         medium_large: {
-          source_url: faker.image.imageUrl()
+          source_url: faker.image.imageUrl(),
         },
         large: {
-          source_url: faker.image.imageUrl()
+          source_url: faker.image.imageUrl(),
         },
         full: {
-          source_url: faker.image.imageUrl()
-        }
-      }
-    }
-  }
+          source_url: faker.image.imageUrl(),
+        },
+      },
+    };
+  },
 });

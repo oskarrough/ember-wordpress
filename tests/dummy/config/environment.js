@@ -37,7 +37,7 @@ module.exports = function (environment) {
     ENV['ember-cli-mirage'] = {
       enabled: true,
       directory: 'tests/dummy/mirage',
-      autostart: true
+      autostart: true,
     };
   }
 
