@@ -1,7 +1,7 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  acf: DS.attr(),
-  date: DS.attr('date'),
-  date_gmt: DS.attr('date'),
-});
+export default class BaseModel extends Model {
+  @attr acf;
+  @attr('date') date;
+  @attr('date') date_gmt;
+}

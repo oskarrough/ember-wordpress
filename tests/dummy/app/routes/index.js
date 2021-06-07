@@ -1,7 +1,10 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
-export default Ember.Route.extend({
+export default class IndexRoute extends Route {
+  @service router;
+
   redirect() {
-    this.transitionTo('posts');
+    this.router.transitionTo('posts');
   }
-});
+}

@@ -1,45 +1,87 @@
-<h1>{{{article.title}}}</h1>
+<h1 data-test-post-title>
+  {{@article.title}}
+</h1>
 
 <p>
-	id: {{article.id}}<br>
-	<time>date: {{article.date}}</time>
+  id:
+  <span data-test-post-id>
+    {{@article.id}}
+  </span>
+  <br />
+  <time>
+    date:
+    <span data-test-post-date>
+      {{@article.date}}
+    </span>
+  </time>
 </p>
 
-<img src="{{article.wp:featuredmedia.media_details.sizes.thumbnail.source_url}}">
+<img
+  src={{@article.wp:featuredmedia.media_details.sizes.thumbnail.source_url}}
+  alt=''
+  role='none'
+  data-test-post-image
+/>
 
-{{{article.content}}}
+<div data-test-post-content>
+  {{@article.content}}
+</div>
 
-<h3>Categories</h3>
+<h3>
+  Categories
+</h3>
 <ul>
-	{{#each article.categories as |category|}}
-		<li>{{link-to category.name 'categories.category' category.slug}}</li>
-	{{/each}}
+  {{#each @article.categories as |category|}}
+    <li>
+      <LinkTo
+        @route='categories.category'
+        @model={{category.slug}}
+        data-test-post-category
+      >
+        {{category.name}}
+      </LinkTo>
+    </li>
+  {{/each}}
 </ul>
 
-<h3>Tags</h3>
+<h3>
+  Tags
+</h3>
 <ul>
-	{{#each article.tags as |tag|}}
-		<li>{{tag.name}}</li>
-	{{/each}}
+  {{#each @article.tags as |tag|}}
+    <li data-test-post-tag>
+      {{tag.name}}
+    </li>
+  {{/each}}
 </ul>
 
 {{outlet}}
 
-{{#if article.commentsAreOpen}}
-  <h3>Comments</h3>
-  {{#each article.replies as |comment|}}
-    <img src="{{comment.author_avatar_url_96}}">
-    <p>author name: {{comment.author_name}}</p>
-    <div>
-      <span>date: {{comment.date}}</span>
+{{#if @article.commentsAreOpen}}
+  <h3>
+    Comments
+  </h3>
+  {{#each @article.replies as |comment|}}
+    <div data-test-post-comment>
+      <img src='{{comment.author_avatar_url_96}}' alt='' role='none' />
+      <p>
+        author name: {{comment.author_name}}
+      </p>
+      <div>
+        <span>
+          date: {{comment.date}}
+        </span>
+      </div>
+      <p>
+        {{#if comment.isHolding}}
+          <em>
+            Comment is holding.
+          </em>
+        {{/if}}
+        {{#if comment.isApproved}}
+          {{comment.content}}
+        {{/if}}
+      </p>
     </div>
-    <p>
-      {{#if comment.isHolding}}
-        <em>Comment is holding.</em>
-      {{/if}}
-      {{#if comment.isApproved}}
-        {{{comment.content}}}
-      {{/if}}
-    </p>
   {{/each}}
 {{/if}}

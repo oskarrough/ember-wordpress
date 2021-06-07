@@ -1,13 +1,13 @@
-import {Factory, faker, association} from 'ember-cli-mirage';
+import { Factory, association } from 'ember-cli-mirage';
+import faker from 'faker';
 
 export default Factory.extend({
-
   author_avatar_urls() {
     return {
       24: faker.image.avatar(),
       48: faker.image.avatar(),
       96: faker.image.avatar(),
-    }
+    };
   },
 
   author_name() {
@@ -16,8 +16,8 @@ export default Factory.extend({
 
   content() {
     return {
-      rendered: faker.lorem.text()
-    }
+      rendered: faker.lorem.text(),
+    };
   },
 
   date() {
@@ -26,5 +26,5 @@ export default Factory.extend({
 
   post: association(),
 
-  status: 'approved'
+  status: 'approved',
 });

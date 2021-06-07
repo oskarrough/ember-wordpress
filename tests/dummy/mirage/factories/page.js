@@ -1,3 +1,3 @@
 import PostFactory from './post';
 
-export default PostFactory
+export default PostFactory;

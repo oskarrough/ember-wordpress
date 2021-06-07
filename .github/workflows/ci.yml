@@ -1,0 +1,53 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+      - uses: mydea/actions-ember-testing@v2
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run tests
+        run: yarn test:ember
+      - name: Lint
+        run: yarn lint
+
+  test-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    strategy:
+      matrix:
+        # Keep this in sync with config/ember-try.js
+        ember:
+          [
+            ember-lts-3.16,
+            ember-lts-3.20,
+            ember-release,
+            ember-beta,
+            ember-canary,
+            ember-default-with-jquery,
+            ember-classic,
+            embroider-safe,
+            embroider-optimized,
+          ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+      - uses: mydea/actions-ember-testing@v2
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run tests
+        run: yarn test:ember-one ${{ matrix.ember }}

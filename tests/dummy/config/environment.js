@@ -1,7 +1,6 @@
-/* eslint-env node */
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'dummy',
     environment,
@@ -10,12 +9,12 @@ module.exports = function(environment) {
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
+        // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
@@ -24,8 +23,8 @@ module.exports = function(environment) {
     },
 
     emberWordpress: {
-      host: 'http://dev-ember-wordpress.pantheonsite.io'
-    }
+      host: 'http://dev-ember-wordpress.pantheonsite.io',
+    },
   };
 
   if (environment === 'development') {
@@ -34,6 +33,12 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV['ember-cli-mirage'] = {
+      enabled: true,
+      directory: 'tests/dummy/mirage',
+      autostart: true,
+    };
   }
 
   if (environment === 'test') {
@@ -45,6 +50,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
