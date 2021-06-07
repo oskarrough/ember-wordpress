@@ -1,27 +1,28 @@
 import { hasMany, attr, belongsTo } from '@ember-data/model';
 import BaseModel from './base';
-import { computed } from '@ember/object';
 
-export default BaseModel.extend({
-  comment_status: attr('string'),
-  content: attr('rendered'),
-  excerpt: attr('rendered'),
-  link: attr('string'),
-  menu_order: attr('number'),
-  modified: attr('date'),
-  modified_gmt: attr('date'),
-  ping_status: attr('string'),
-  slug: attr('string'),
-  status: attr('string'),
-  template: attr('string'),
-  title: attr('rendered'),
-  author: belongsTo('wordpress/user'),
-  replies: hasMany('wordpress/comment'),
-  'wp:attachment': hasMany('wordpress/attachment'),
-  'wp:featuredmedia': belongsTo('wordpress/attachment'),
-  tags: hasMany('wordpress/tag'),
-  categories: hasMany('wordpress/category'),
-  commentsAreOpen: computed('comment_status', function(){
-    return this.get('comment_status') === 'open';
-  })
-})
+export default class PostModel extends BaseModel {
+  @attr('string') comment_status;
+  @attr('rendered') content;
+  @attr('rendered') excerpt;
+  @attr('string') link;
+  @attr('number') menu_order;
+  @attr('date') modified;
+  @attr('date') modified_gmt;
+  @attr('string') ping_status;
+  @attr('string') slug;
+  @attr('string') status;
+  @attr('string') template;
+  @attr('rendered') title;
+
+  @belongsTo('wordpress/user') author;
+  @hasMany('wordpress/comment') replies;
+  @hasMany('wordpress/attachment') 'wp:attachment';
+  @belongsTo('wordpress/attachment') 'wp:featuredmedia';
+  @hasMany('wordpress/tag') tags;
+  @hasMany('wordpress/category') categories;
+
+  get commentsAreOpen() {
+    return this.comment_status === 'open';
+  }
+}

@@ -1,26 +1,25 @@
 import { attr, belongsTo } from '@ember-data/model';
-import { computed } from '@ember/object';
 import BaseModel from './base';
 
-export default BaseModel.extend({
-  author_avatar_urls: attr(),
-  author_name: attr('string'),
-  author_email: attr('string'),
-  author_url: attr('string'),
-  content: attr('rendered'),
-  link: attr('string'),
-  post: belongsTo('wordpress/post'),
-  status: attr('string'),
+export default class CommentModel extends BaseModel {
+  @attr author_avatar_urls;
+  @attr('string') author_name;
+  @attr('string') author_email;
+  @attr('string') author_url;
+  @attr('rendered') content;
+  @attr('string') link;
+  @attr('string') status;
+  @belongsTo('wordpress/post') post;
 
-  author_avatar_url_96: computed('author_avatar_urls', function () {
-    return this.get('author_avatar_urls.96');
-  }),
+  get author_avatar_url_96() {
+    return this.author_avatar_urls['96'];
+  }
 
-  isHolding: computed('status', function() {
-    return this.get('status') === 'hold';
-  }),
+  get isHolding() {
+    return this.status === 'hold';
+  }
 
-  isApproved: computed('status', function() {
-    return this.get('status') === 'approved';
-  })
-});
+  get isApproved() {
+    return this.status === 'approved';
+  }
+}
