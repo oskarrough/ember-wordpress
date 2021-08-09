@@ -37,8 +37,8 @@ Note: the `wordpress/post` and `wordpress/page` models are identical and so are 
 
 ```js
 // app/models/recipe.js
-import Model, { attr } from '@ember-data/model';
 import PostModel from 'ember-wordpress/models/post';
+import { attr } from '@ember-data/model';
 export default class RecipeModel extends PostModel {
   @attr() ingredients;
 }
