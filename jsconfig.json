@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules", "dist", "tmp", "coverage", "vendor", "translations"]
+}

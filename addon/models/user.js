@@ -1,13 +1,20 @@
+import { attr } from '@ember-data/model';
 import BaseModel from './base';
-import DS from "ember-data";
-const { attr } = DS;
-import { alias } from '@ember/object/computed';
 
-export default BaseModel.extend({
-  name: attr('string'),
-  slug: attr('string'),
-  avatar_urls: attr(),
-  avatar_url_24: alias('avatar_urls.24'),
-  avatar_url_48: alias('avatar_urls.48'),
-  avatar_url_96: alias('avatar_urls.96')
-});
+export default class UserModel extends BaseModel {
+  @attr('string') name;
+  @attr('string') slug;
+  @attr() avatar_urls;
+
+  get avatar_url_24() {
+    return this.avatar_urls?.['24'];
+  }
+
+  get avatar_url_48() {
+    return this.avatar_urls?.['48'];
+  }
+
+  get avatar_url_96() {
+    return this.avatar_urls?.['96'];
+  }
+}

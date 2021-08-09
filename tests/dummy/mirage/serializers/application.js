@@ -1,17 +1,18 @@
 import { RestSerializer } from 'ember-cli-mirage';
 
-export default RestSerializer.extend({
+export default class ApplicationSerializer extends RestSerializer {
   serialize(object, request) {
-    let json = RestSerializer.prototype.serialize.call(this, object, request);
+    let json = super.serialize(object, request);
+
     return json[Object.keys(json)[0]];
-  },
+  }
 
   keyForForeignKey(relationshipName) {
     if (relationshipName === 'wp:featuredmedia') return relationshipName;
-    return RestSerializer.prototype.keyForForeignKey.apply(this, arguments);
-  },
+    return super.keyForForeignKey(...arguments);
+  }
 
-  keyForAttribute(attr){
+  keyForAttribute(attr) {
     return attr;
   }
-});
+}

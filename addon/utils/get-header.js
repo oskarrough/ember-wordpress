@@ -1,6 +1,4 @@
-import Ember from 'ember';
-
-const { A, isNone } = Ember;
+import { isNone } from '@ember/utils';
 
 /**
  * Do a case-insensitive lookup of an HTTP header
@@ -16,7 +14,7 @@ export default function getHeader(headers, name) {
     return; // ask for nothing, get nothing.
   }
 
-  const matchedKey = A(Object.keys(headers)).find((key) => {
+  const matchedKey = Object.keys(headers).find((key) => {
     return key.toLowerCase() === name.toLowerCase();
   });
 

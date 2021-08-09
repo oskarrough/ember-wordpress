@@ -1,14 +1,13 @@
 // This is the base class used for the 'Category' and 'Tag' models
+import { attr } from '@ember-data/model';
 import BaseModel from './base';
-import DS from 'ember-data';
-const { attr } = DS;
 
-export default BaseModel.extend({
-	count: attr('number'),
-	description: attr('string'),
-	link: attr('string'),
-	name: attr('string'),
-	slug: attr('string'),
-	taxonomy: attr('string'),
-	parent: attr('number')
-});
+export default class TermModel extends BaseModel {
+  @attr('number') count;
+  @attr('string') description;
+  @attr('string') link;
+  @attr('string') name;
+  @attr('string') slug;
+  @attr('string') taxonomy;
+  @attr('number') parent;
+}

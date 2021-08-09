@@ -1,17 +1,30 @@
-<hr>
+<hr />
 
-<h1>{{category.name}}</h1>
+<h1 data-test-category-name>
+  {{this.category.name}}
+</h1>
 
-{{#if posts.isFulfilled}}
-	<p>Posts categorized as <em>{{category.name}}</em>:</p>
-	<ul>
-		{{#each posts as |post|}}
-			<li>{{link-to post.title 'posts.post' post.slug}}</li>
-		{{else}}
-			<li>There are no posts in this category. Yet.</li>
-		{{/each}}
-	</ul>
+{{#if this.posts.isFulfilled}}
+  <p>
+    Posts categorized as
+    <em>
+      {{this.category.name}}
+    </em>
+    :
+  </p>
+  <ul>
+    {{#each this.posts as |post|}}
+      <li>
+        <LinkTo @route='posts.post' @model={{post.slug}} data-test-post-link>
+          {{post.title}}
+        </LinkTo>
+      </li>
+    {{else}}
+      <li>
+        There are no posts in this category. Yet.
+      </li>
+    {{/each}}
+  </ul>
 {{/if}}
 
 {{outlet}}
-
