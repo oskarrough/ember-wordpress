@@ -49,7 +49,7 @@ module('Acceptance | application', function (hooks) {
         firstPost['wp:featuredmedia'].media_details.sizes.thumbnail.source_url
       );
 
-    assert.dom('[data-test-post-content]').hasText(firstPost.content.rendered);
+    assert.dom('[data-test-post-body]').hasText(firstPost.body.rendered);
 
     assert
       .dom('[data-test-post-category]')
@@ -112,7 +112,7 @@ module('Acceptance | application', function (hooks) {
         page['wp:featuredmedia'].media_details.sizes.thumbnail.source_url
       );
 
-    assert.dom('[data-test-post-content]').hasText(page.content.rendered);
+    assert.dom('[data-test-post-body]').hasText(page.body.rendered);
 
     assert
       .dom('[data-test-post-category]')

@@ -37,11 +37,11 @@ Note: the `wordpress/post` and `wordpress/page` models are identical and so are 
 
 ```js
 // app/models/recipe.js
-import DS from 'ember-data';
 import PostModel from 'ember-wordpress/models/post';
-export default PostModel.extend({
-  ingredients: DS.attr()
-});
+import { attr } from '@ember-data/model';
+export default class RecipeModel extends PostModel {
+  @attr() ingredients;
+}
 ```
 
 If you're using the ACF plugin your custom fields will be at `model.get('acf.myCustomField')`.

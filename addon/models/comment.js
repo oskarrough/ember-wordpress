@@ -6,7 +6,7 @@ export default class CommentModel extends BaseModel {
   @attr('string') author_name;
   @attr('string') author_email;
   @attr('string') author_url;
-  @attr('rendered') content;
+  @attr('rendered') body;
   @attr('string') link;
   @attr('string') status;
   @belongsTo('wordpress/post') post;
