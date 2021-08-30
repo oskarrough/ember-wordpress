@@ -14,7 +14,7 @@ export default Factory.extend({
     return faker.name.firstName() + ' ' + faker.name.lastName();
   },
 
-  content() {
+  body() {
     return {
       rendered: faker.lorem.text(),
     };

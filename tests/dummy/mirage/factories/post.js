@@ -14,7 +14,7 @@ export default Factory.extend({
     };
   },
 
-  content() {
+  body() {
     return {
       rendered: faker.lorem.text(),
     };

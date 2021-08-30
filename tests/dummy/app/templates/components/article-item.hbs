@@ -23,8 +23,8 @@
   data-test-post-image
 />
 
-<div data-test-post-content>
-  {{@article.content}}
+<div data-test-post-body>
+  {{@article.body}}
 </div>
 
 <h3>
@@ -79,7 +79,7 @@
           </em>
         {{/if}}
         {{#if comment.isApproved}}
-          {{comment.content}}
+          {{comment.body}}
         {{/if}}
       </p>
     </div>

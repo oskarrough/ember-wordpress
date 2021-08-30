@@ -3,7 +3,7 @@ import BaseModel from './base';
 
 export default class PostModel extends BaseModel {
   @attr('string') comment_status;
-  @attr('rendered') content;
+  @attr('rendered') body;
   @attr('rendered') excerpt;
   @attr('string') link;
   @attr('number') menu_order;
